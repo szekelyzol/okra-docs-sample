@@ -8,6 +8,8 @@ hide_navigation: false
 ---
 <Callout type="info">
   Okra has shut down its services. This site recreates Okra's developer documentation as a portfolio piece and contains no real data. Email addresses and Okra URLs are placeholders.
+
+  Okra published its documentation with [Doctave](https://www.doctave.com). This site is built with [Docapella](https://github.com/Doctave/docapella), Doctave's open-source successor.
 </Callout>
 
 <div class="section-header no-toc">
