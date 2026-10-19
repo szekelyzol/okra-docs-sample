@@ -1,0 +1,74 @@
+title: Okra Docs
+domain: https://szekelyzol.github.io
+
+theme:
+  colors:
+    accent: "#E5F887"
+    content_bg_dark: "#272729"
+    content_bg_secondary_dark: "#030f08"
+    nav_bg_dark: "#272729"
+    nav_text_soft_dark: "#CDC8C6"
+    content_border_dark: "#434345"
+    nav_border_dark: "#434345"
+    nav_bg_secondary_dark: "#353537"
+    header_main_dark: "#FFF"
+    header_bg_dark: "#272729"
+    header_bg_secondary_dark: "#353537"
+    header_text_base_dark: "#F5F0EE"
+    header_text_soft_dark: "#CDC8C6"
+    header_text_strong_dark: "#FFF"
+    header_border_dark: "#434345"
+    main_contrast_dark: "#353537"
+  color_mode: dark
+  logo:
+    src: _assets/logo.svg
+    src_dark: _assets/logo-dark.png
+  favicon:
+    src: _assets/favicon.jpg
+
+styles:
+  - _assets/style.css
+
+open_api:
+  - spec_file: docs.json
+    uri_prefix: /reference/api
+
+header:
+  links:    
+    - external: https://status.example.com/
+      label: Status Page
+    - external: https://dash.example.com/dashboard/home
+      label: Dashboard
+
+tabs:
+  - label: Home
+    path: /
+    icon:
+      set: lucide
+      name: home
+  - label: Get started
+    path: /get-started/
+    icon:
+      set: lucide
+      name: sparkles
+  - label: Identity
+    path: /account-data/
+    icon:
+      set: lucide
+      name: users
+  - label: Developer tools
+    path: /reference/
+    icon:
+      set: lucide
+      name: code
+    subtabs:
+      - label: Okra API
+        path: /reference/
+        icon:
+          set: lucide
+          name: code
+      - label: Troubleshooting
+        path: /reference/troubleshooting/
+        icon:
+          set: lucide
+          name: circle-help

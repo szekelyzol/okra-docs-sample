@@ -1,0 +1,6 @@
+- heading: Troubleshooting
+  items:
+    - label: Overview
+      href: /reference/troubleshooting/
+    - label: API errors
+      href: /reference/troubleshooting/api-errors

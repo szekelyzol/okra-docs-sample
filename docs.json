@@ -1,0 +1,2784 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Okra API Reference",
+        "version": "2.0",
+        "description": "# Hello there!\n\nWelcome to the API reference for Okra's APIs!\n\n## About Okra\n\nOkra provides the infrastructure layer that powers the next wave of financial innovation by unlocking the power of Open Finance. Okra connects to thousands of banks using a secure open API, removing the complexity and enabling seamless access to financial information and payment infrastructure.\n\n## About the API reference\n\nThe API documentation is stored in an [OpenAPI v3.0 specification](https://swagger.io/specification/) file, using JSON format.\n\n## Resources\n\nTo learn more about Okra's APIs and how you can integrate with them, check out the [documentation](https://docs.example.com/)."
+    },
+    "servers": [
+        {
+            "url": "https://identity-api.example.com/v2",
+            "description": "Production"
+        },
+        {
+            "url": "https://identity-api.example.com/v2/sandbox",
+            "description": "Sandbox"
+        }
+    ],
+    "paths": {
+        "/products/nin-verify": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nin"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "nin":{
+                                        "description":"National Identification Number (NIN) issued by Nigeria's National Identity Management Commission (NIMC).",
+                                        "type":"string"
+                                    },
+                                    "refresh": {
+                                        "description": "You can request the API to refresh a user's identity profile by setting this parameter to `true`. Refreshing an existing identity profile means that any changes in personal details, like a new address or a change in the user's marital status will be reflected in the user's identity data. If there is no existing identity profile yet for a user with the requested NIN, the API creates a new one. If you set this parameter to `false`, the API creates a new identity profile based on the requested NIN.",
+                                        "type": "boolean"
+                                    },
+                                    "testing": {
+                                        "description": "When `true`, this setting redirects your API call to the [Sandbox environment](https://docs.example.com/get-started/testing-your-integration). The data you receive is sandbox data, not real user data. When `testing` is `true`, you will not be charged for using this endpoint operation.",
+                                        "type": "boolean"
+                                    },
+                                    "success": {
+                                        "description":"Use this setting in the Sandbox environment to test success and failure scenarios. When `true`, this setting forces a success response for the NIN name verify operation. When `false`, it forces a failure response.",
+                                        "type":"boolean"
+                                    },
+                                    "includeRawImage": {
+                                        "description": "Use this setting to request the Identity API to return a URL that points to the user's identity image.",
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Identity"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/nin_verify_response"
+                                },
+                                "examples":{
+                                    "nin_verify_response_example":{
+                                        "$ref":"#/components/examples/nin_verify_response_example"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Bad request error.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/400_error"
+                                },
+                                "examples":{
+                                    "nin_verify_400_error_example":{
+                                        "$ref":"#/components/examples/nin_verify_400_error_example"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unauthorized - This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/401_error"
+                                },
+                                "example":{
+                                    "name":"APIError",
+                                    "status":"error",
+                                    "message":"Unauthorized - You don't have access to this route.",
+                                    "extra":null
+                                }
+                            }
+                        }
+                    },
+                    "422":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unprocessable Entity error - occurs when the API cannot validate the contents of your request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/422_error"
+                                },
+                                "examples":{
+                                    "nin_verify_invalid_nin_length_example":{
+                                        "$ref":"#/components/examples/nin_verify_invalid_nin_length_example"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Too many requests",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/429_error"
+                                }
+                            }
+                        }
+                    },
+                    "503":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Service unavailable - This error indicates that the API is not ready to handle the request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/503_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"Our data source has returned a timeout response. Please retry the request."
+                                }
+                            }
+                        }
+                    },
+                    "502":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Service unavailable - This error indicates that the API is not ready to handle the request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/502_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"Something went wrong from our provider. Please try again later"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": [
+                        ]
+                    }
+                ],
+                "operationId": "NinVerify",
+                "summary": "NIN Verify",
+                "description": "This operation enables you to to seamlessly verify user identities using their National Identification Number (NIN) issued by Nigeria's National Identity Management Commission (NIMC). <br/><br/>The base server URL for this endpoint is `https://identity-api.example.com/v2/`"
+            }
+        },
+        "/products/nuban-name-verify": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nuban",
+                                    "bank"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "nuban": {
+                                        "description": "The user's NUBAN.",
+                                        "type": "string"
+                                    },
+                                    "bank": {
+                                        "description": "The unique bank ID used to identify the user's account holder bank. Visit Okra's [Account data coverage](https://docs.example.com/account-data/account-data-coverage) page for the list of bank IDs.",
+                                        "type": "string"
+                                    },
+                                    "refresh": {
+                                        "description": "You can request the API to refresh a user's identity profile by setting this parameter to `true`. Refreshing an existing identity profile means that any changes in personal details, like a new address or a change in the user's marital status will be reflected in the user's identity data. If there is no existing identity profile yet for a user with the requested NIN, the API creates a new one. If you set this parameter to `false`, the API creates a new identity profile based on the requested NIN.",
+                                        "type": "boolean"
+                                    },
+                                    "testing": {
+                                        "description": "When `true`, this setting redirects your API call to the [Sandbox environment](https://docs.example.com/get-started/testing-your-integration). The data you receive is sandbox data, not real user data. When `testing` is `true`, you will not be charged for using this endpoint operation.",
+                                        "type": "boolean"
+                                    },
+                                    "success": {
+                                        "description":"Use this setting in the Sandbox environment to test success and failure scenarios. When `true`, this setting forces a success response for the NIN name verify operation. When `false`, it forces a failure response.",
+                                        "type":"boolean"
+                                    },
+                                    "includeRawImage": {
+                                        "description": "Use this setting to request the Identity API to return a URL that points to the user's identity image.",
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Identity"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/nuban_name_verify_response"
+                                },
+                                "examples":{
+                                    "nuban_name_verify_response_example":{
+                                        "$ref":"#/components/examples/nuban_name_verify_response_example"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Bad request error.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/400_error"
+                                },
+                                "example":{
+                                    "status":"error"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unauthorized - This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/401_error"
+                                },
+                                "example":{
+                                    "name":"APIError",
+                                    "status":"error",
+                                    "message":"Unauthorized - You don't have access to this route.",
+                                    "extra":null
+                                }
+                            }
+                        }
+                    },
+                    "422":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unprocessable Entity error - occurs when the API cannot validate the contents of your request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/422_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"bvn[1] length must be less than or equal to 11 characters long.",
+                                    "data":{
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Too many requests",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/429_error"
+                                }
+                            }
+                        }
+                    },
+                    "503":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Service unavailable - This error indicates that the API is not ready to handle the request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/503_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"Our data source has returned a timeout response. Please retry the request."
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": [
+                        ]
+                    }
+                ],
+                "operationId": "Nuban Name Verify",
+                "summary": "Nuban Name Verify",
+                "description": "This operation enables you to retrieve a user’s full name using their NUBAN. This operation is ideal for use cases where a complete KYC profile is not necessary. <br/><br/>The base server URL for this endpoint is `https://identity-api.example.com/v2/`"
+            }
+        },
+        "/products/identity/search": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "bvn":{
+                                        "description":"The user's BVN.",
+                                        "type":"string",
+                                        "example": "22165416979"
+                                    },
+                                    "nuban": {
+                                        "description": "The user's NUBAN.",
+                                        "type": "string",
+                                        "example": "0000014579"
+                                    },
+                                    "nin":{
+                                        "description":"National Identification Number (NIN) issued by Nigeria's National Identity Management Commission (NIMC).",
+                                        "type":"string",
+                                        "example": "97340343221"
+                                    },
+                                    "id": {
+                                        "description": "The unique ID of an identity record.",
+                                        "type": "string",
+                                        "example": "140afb3ddecee700130acbc4"
+                                    },
+                                    "customer": {
+                                        "description": "The unique ID of a customer.",
+                                        "type": "string",
+                                        "example": "140afb3ddecee700130acbc4"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Identity"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/search_identity_response"
+                                },
+                                "examples":{
+                                    "nuban_name_verify_response_example":{
+                                        "$ref":"#/components/examples/search_identity_response_example"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Bad request error.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/400_error"
+                                },
+                                "example":{
+                                    "status":"error"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unauthorized - This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/401_error"
+                                },
+                                "example":{
+                                    "name":"APIError",
+                                    "status":"error",
+                                    "message":"Unauthorized - You don't have access to this route.",
+                                    "extra":null
+                                }
+                            }
+                        }
+                    },
+                    "422":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unprocessable Entity error - occurs when the API cannot validate the contents of your request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/422_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"bvn[1] length must be less than or equal to 11 characters long.",
+                                    "data":{
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Too many requests",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/429_error"
+                                }
+                            }
+                        }
+                    },
+                    "503":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Service unavailable - This error indicates that the API is not ready to handle the request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/503_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"Our data source has returned a timeout response. Please retry the request."
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": [
+                        ]
+                    }
+                ],
+                "operationId": "SearchIdentity",
+                "summary": "Search for identity",
+                "description": "This operation enables you to retrieve an already verified user’s identity profile using their NIN, BVN, NUBAN, identity record ID, or customer ID. <br/><br/>- When searching for an identity profile, you must use at least one request parameter. <br/>- The base server URL for this endpoint is `https://identity-api.example.com/v2/`"
+            }
+        },
+        "/products/wallets":{
+            "get":{
+                "tags":[
+                    "Wallets"
+                ],
+                "responses":{
+                    "200":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"A successful response of the Get wallets operation.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/components/schemas/get_wallets_response"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Bad request error.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/400_error"
+                                },
+                                "example":{
+                                    "status":"error"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unauthorized - This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/401_error"
+                                },
+                                "example":{
+                                    "name":"APIError",
+                                    "status":"error",
+                                    "message":"Unauthorized - You don't have access to this route.",
+                                    "extra":null
+                                }
+                            }
+                        }
+                    },
+                    "429":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Too many requests",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/429_error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated":false,
+                "security": [
+                    {
+                        "bearer": [
+                        ]
+                    }
+                ],
+                "operationId":"GetWallets",
+                "summary":"Get wallets",
+                "description": "This endpoint returns details about all the wallets across your Okra businesses."
+            }
+        },
+        "/products/banks/": {
+            "get": {
+                "tags": [
+                    "Banks"
+                ],
+                "responses": {
+                    "200": {
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/banks_response"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "400":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Bad request error.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/400_error"
+                                },
+                                "example":{
+                                    "status":"error"
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Unauthorized - This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/401_error"
+                                },
+                                "example":{
+                                    "name":"APIError",
+                                    "status":"error",
+                                    "message":"Unauthorized - You don't have access to this route.",
+                                    "extra":null
+                                }
+                            }
+                        }
+                    },
+                    "429":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Too many requests",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/429_error"
+                                }
+                            }
+                        }
+                    },
+                    "503":{
+                        "headers": {
+                            "X-RateLimit-Limit": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The total number or requests that the API allows in one minute."
+                            },
+                            "X-RateLimit-Remaining": {
+                                "schema":{
+                                    "type": "integer"
+                                },
+                                "description": "The number or remaining requests in the current time window."
+                            },
+                            "X-RateLimit-Reset": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "The time in UNIX epoc seconds when the current rate limit window resets."
+                            },
+                            "Retry-After": {
+                                "schema":{
+                                    "type": "number",
+                                    "format": "float"
+                                },
+                                "description": "Sent when you exceed the allowed number of calls. Returns the amount of time you need to wait before you can resume calling the API."
+                            }
+                        },
+                        "description":"Service unavailable - This error indicates that the API is not ready to handle the request.",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/503_error"
+                                },
+                                "example":{
+                                    "status":"error",
+                                    "message":"Our data source has returned a timeout response. Please retry the request."
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": [
+                        ]
+                    }
+                ],
+                "operationId": "ListAllBanks",
+                "summary": "List all banks",
+                "description": "This endpoint returns the list of all institutions currently supported by Okra."
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "title": "Customer",
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "description": "The unique identifier that references the user.",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "The user’s full name.",
+                        "type": "string"
+                    }
+                }
+            },
+            "Enrollment":{
+                "title":"Enrollment",
+                "description":"Lists details about the bank where the user is enrolled.",
+                "type":"object",
+                "properties":{
+                    "bank":{
+                        "description":"The bank that recorded the user's identity.",
+                        "type":"string"
+                    },
+                    "branch":{
+                        "description":"The branch of the bank that recorded the user's identity.",
+                        "type":"string"
+                    },
+                    "registration_date":{
+                        "description":"The date when the bank created the user's identity record. The timestamp value follows the ISO 8601 format.",
+                        "type":"string",
+                        "example":"2017-06-13"
+                    }
+                }
+            },            
+            "get_wallets_response":{
+                "title":"The response of the Get wallets operation.",
+                "type":"object",
+                "properties":{
+                    "success": {
+                        "description": "Shows the whether your request was successful or not.",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "description": "Shows the response message to your request.",
+                        "type": "string"
+                    },
+                    "data":{
+                        "type": "array",
+                        "items": {
+                            "$ref":"#/components/schemas/get_wallets_response_data"
+                        }
+                    }
+                }
+            },
+            "get_wallets_response_data":{
+                "title":"A wallet object.",
+                "type":"object",
+                "properties":{
+                    "_id":{
+                        "description":"The unique `ID` of a wallet record.",
+                        "type":"string",
+                        "example": "645ac1388501662697e01234"
+                    },
+                    "auto_topup":{
+                        "description":"Returns details about automatic top-up settings for a wallet.",
+                        "type":"object",
+                        "properties":{
+                            "status":{
+                                "description":"Shows whether automatic top-up is enabled for a wallet.",
+                                "type":"boolean",
+                                "example": false
+                            },
+                            "currency":{
+                                "description":"Shows the currency used to purchase credits for automatic top-ups.",
+                                "type":"string",
+                                "example": "NGN"
+                            }
+                        }
+                    },
+                    "credits":{
+                        "description":"Shows the current credit balance available in a wallet.",
+                        "type":"number",
+                        "format":"float",
+                        "example": "35623.43"
+                    },
+                    "current_project":{
+                        "description":"Returns information about the project that the wallet belongs to.",
+                        "type":"object",
+                        "properties": {
+                            "name":{
+                                "description":"Returns the name of the project that the wallet belongs to.",
+                                "type":"string",
+                                "example": "My production project"
+                            },
+                            "_id":{
+                                "description":"Returns the `ID` of the project that the wallet belongs to.",
+                                "type":"boolean",
+                                "example": "123ac1388501662697e01234"
+                            }
+                        }
+                    },
+                    "payment_wallet":{
+                        "type": "string",
+                        "description": "Shows the current balance available in a payments wallet.",
+                        "example": "0"
+                    }
+                }
+            },
+            "400_error":{
+                "type":"object",
+                "title":"Bad request error",
+                "description":"This error occurs when the API cannot or will not process your request due to something that is perceived to be a client error (for example, malformed request syntax, invalid request message framing, or deceptive request routing).",
+                "properties":{
+                    "status":{
+                        "type":"string",
+                        "description":"The status of your request."
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error."
+                    },
+                    "data":{
+                        "type":"string",
+                        "nullable": true
+                    },
+                    "total":{
+                        "type":"string",
+                        "nullable": true
+                    }
+                }
+            },
+            "401_error":{
+                "type":"object",
+                "title":"Unauthorized",
+                "description":"This error occurs when your request does not have valid authentication credentials for the requested resource.",
+                "properties":{
+                    "name":{
+                        "description":"Returns the type of the error.",
+                        "type":"string",
+                        "nullable": true
+                    },
+                    "status":{
+                        "type":"string",
+                        "description":"The status of your request."
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error."
+                    },
+                    "extra":{
+                        "type":"string",
+                        "nullable": true
+                    }
+                }
+            },
+            "422_error":{
+                "type":"object",
+                "title":"Unprocessable Entity",
+                "description":"This error occurs when the API cannot validate the contents of your request.",
+                "properties":{
+                    "status":{
+                        "type":"string",
+                        "description":"The status of your request."
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error."
+                    },
+                    "data":{
+                        "type":"string",
+                        "nullable": true
+                    }
+                }
+            },
+            "429_error":{
+                "type":"object",
+                "title":"Too many requests",
+                "description":"This error occurs when you pass the number of allowed calls on rate limited endpoints.",
+                "properties":{
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error.",
+                        "example":"Too Many Requests."
+                    }
+                }
+            },
+            "503_error":{
+                "type":"object",
+                "title":"Service unavailable",
+                "description":"This error indicates that the API is not ready to handle the request.",
+                "properties":{
+                    "status":{
+                        "type":"string",
+                        "description":"The status of your request."
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error."
+                    }
+                }
+            },
+            "502_error":{
+                "type":"object",
+                "title":"Service unavailable",
+                "description":"This error indicates that the API is not ready to handle the request.",
+                "properties":{
+                    "status":{
+                        "type":"string",
+                        "description":"The status of your request."
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"A short description of the error."
+                    }
+                }
+            },
+            "Breakdown": {
+                "title": "Breakdown",
+                "description": "Lists details about the charge for using a specific product.",
+                "type": "object",
+                "properties": {
+                    "discount": {
+                        "description":"Returns the amount of discount applied on the product costs.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "billable_product": {
+                        "description": "Returns a charge breakdown for the product billed in your Okra app implementation.",
+                        "type": "object",
+                        "properties": {
+                            "effective_credits":{
+                                "description":"The amount that is charged after discount.",
+                                "format":"int32",
+                                "type":"integer"
+                            },
+                            "credits":{
+                                "description":"The amount that is charged before discount.",
+                                "format":"float",
+                                "type":"number"
+                            },
+                            "status":{
+                                "description":"Returns the status of the product usage.",
+                                "type":"boolean"
+                            },
+                            "addon_products":{
+                                "description":"Returns an array of any additional products used.",
+                                "type":"array",
+                                "items":{
+                                    "type": "string"
+                                }
+                            },
+                            "product":{
+                                "description":"Returns the name of the product that is billed, for example `identity`.",
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "billable_products": {
+                        "description": "Returns a charge breakdown for the product billed in your Okra app implementation.",
+                        "type": "array",
+                        "items": {
+                            "description": "Lists details about the charge for using a specific product.",
+                            "$ref":"#/components/schemas/billable_products_array_object"
+                        }
+                    },
+                    "source":{
+                        "description":"The device or platform the record was carried on.",
+                        "type":"string",
+                        "enum": ["link", "android", "ios", "rn-ios", "rn-android", "ionic", "wordpress", "vue", "flutter", "angular", "integration", "seeder", "laravel", "react", "ussd", "api", "feature-phone"]
+                    },
+                    "limit":{
+                        "description":"Limit set on transaction if product is included",
+                        "type":"string"
+                    }
+                }
+            },
+            "billable_products_array_object": {
+                "description": "Returns a charge breakdown for the product billed in your Okra app implementation.",
+                "type": "object",
+                "properties": {
+                    "archived": {
+                        "description":"Shows whether this record is archived.",
+                        "type": "boolean"
+                    },
+                    "_id": {
+                        "description":"The unique `ID` of a receipt record.",
+                        "type": "string"
+                    },
+                    "effective_credits":{
+                        "description":"The amount that is charged after discount.",
+                        "format":"int32",
+                        "type":"integer"
+                    },
+                    "cost":{
+                        "description":"The amount that is charged before discount.",
+                        "format":"float",
+                        "type":"number"
+                    },
+                    "status":{
+                        "description":"Returns the status of the product usage.",
+                        "type":"boolean"
+                    },
+                    "addon_products":{
+                        "description":"Returns an array of any additional products used.",
+                        "type":"array",
+                        "items":{
+                            "type": "string"
+                        }
+                    },
+                    "product":{
+                        "description":"Returns the name of the product that is billed, for example `identity`.",
+                        "type":"string"
+                    }
+                }
+            },
+            "banks_response": {
+                "title": "Response for the list all banks operation",
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "description": "Shows whether the operation was successful or not.",
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "message": {
+                        "description": "Shows the status response message for the operation.",
+                        "type": "string",
+                        "example": "Successfully retrieved banks"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/banks_data"
+                        }
+                    }
+                }
+            },
+            "banks_data": {
+                "title": "Data object in the response for the list all banks operation",
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "description": "The unique ID of a bank.",
+                        "example": "5d6fe57a4099cc4b210bbeb1"
+                    },
+                    "name": {
+                        "description": "The name of a bank.",
+                        "example": "First Bank of Nigeria"
+                    },
+                    "slug": {
+                        "description": "The name of a bank in slug format",
+                        "example": "first-bank-of-nigeria"
+                    }
+                }
+            },
+            "search_identity_response": {
+                "title": "Response for the search identity operation",
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "description": "Shows whether the operation was successful or not.",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "description": "Shows the status response message for the operation.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/search_identity_data"
+                    }
+                }
+            },
+            "search_identity_data": {
+                "title": "Data object in the response for the search identity operation",
+                "type": "object",
+                "properties": {
+                    "identity": {
+                        "$ref": "#/components/schemas/search_identity"
+                    },
+                    "receipt":{
+                       "description": "Lists transaction details for the process operation.",
+                       "$ref":"#/components/schemas/Receipt"
+                    }
+                }
+            },
+            "nin_verify_response": {
+                "title": "Response for the NIN verify operation",
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "description": "Shows whether the verify operation was successful or not.",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "description": "Shows the status response message for the operation.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/nin_verify_data"
+                    }
+                }
+            },
+            "nin_verify_data": {
+                "title": "Data object in the response for the NIN verify operation",
+                "type": "object",
+                "properties": {
+                    "identity": {
+                        "$ref": "#/components/schemas/nin_verify_identity"
+                    },
+                    "receipt":{
+                       "description": "Lists transaction details for the process operation.",
+                       "$ref":"#/components/schemas/Receipt"
+                    }
+                }
+            },
+            "nin_verify_identity": {
+                "title": "Identity object in the response for the NIN verify operation",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "nullable": true,
+                        "description": "Okra's unique identifier used to reference the identity profile.",
+                        "type": "string"
+                    },
+                    "firstname": {
+                        "description": "The first name of the account owner.",
+                        "type": "string"
+                    },
+                    "middlename": {
+                        "description": "The middlename name of the account owner.",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "description": "The last name of the account owner.",
+                        "type": "string"
+                    },
+                    "fullname": {
+                        "description": "The full name of the owner, as provided by the bank.",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "The account owner's date of birth, as provided by the bank.",
+                        "type": "string"
+                    },
+                    "gender": {
+                        "description": "The gender of the account owner.",
+                        "type": "string"
+                    },
+                    "customer": {
+                        "description": "Okra's unique identifier used to reference the user that the identity profile belongs to.",
+                        "type": "string"
+                    },
+                    "aliases": {
+                        "description": "An array of alternative names.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "phone": {
+                        "description": "The phone number of the user.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "email": {
+                        "description": "The account owner's registered email address.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "address": {
+                        "description": "The accounts owners registered address.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nationality":{
+                       "description":"The user's nationality.",
+                       "type":"string"
+                    },
+                    "lga_of_origin":{
+                       "description":"The local government area where the user originates from.",
+                       "type":"string"
+                    },
+                    "lga_of_residence":{
+                       "description":"The local government area of the user's place of residence.",
+                       "type":"string"
+                    },
+                    "state_of_origin":{
+                       "description":"The state where the user originates from.",
+                       "type":"string"
+                    },
+                    "state_of_residence":{
+                       "description":"The state where the user has residence.",
+                       "type":"string"
+                    },
+                    "marital_status": {
+                        "nullable": true,
+                        "description": "The marital status of the account owner.",
+                        "type": "string"
+                    },
+                    "next_of_kins": {
+                        "description": "The account owner person's closest living relative(s) as returned by the bank",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nin": {
+                        "description": "The national identification number of the user.",
+                        "type": "string"
+                    },
+                    "photo_id": {
+                        "description": "The photograpgh of the user as provided by the bank.",
+                        "$ref": "#/components/schemas/PhotoId"
+                    },
+                    "enrollment":{
+                       "description": "Lists details about the bank where the user is enrolled.",
+                       "$ref":"#/components/schemas/Enrollment"
+                    }
+                }
+            },
+            "search_identity": {
+                "title": "Identity object in the response for the search identity operation",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "nullable": true,
+                        "description": "Okra's unique identifier used to reference the identity profile.",
+                        "type": "string"
+                    },
+                    "firstname": {
+                        "description": "The first name of the account owner.",
+                        "type": "string"
+                    },
+                    "middlename": {
+                        "description": "The middlename name of the account owner.",
+                        "type": "string"
+                    },
+                    "lastname": {
+                        "description": "The last name of the account owner.",
+                        "type": "string"
+                    },
+                    "fullname": {
+                        "description": "The full name of the owner, as provided by the bank.",
+                        "type": "string"
+                    },
+                    "dob": {
+                        "description": "The account owner's date of birth, as provided by the bank.",
+                        "type": "string"
+                    },
+                    "gender": {
+                        "description": "The gender of the account owner.",
+                        "type": "string"
+                    },
+                    "customer": {
+                        "description": "Okra's unique identifier used to reference the user that the identity profile belongs to.",
+                        "type": "string"
+                    },
+                    "aliases": {
+                        "description": "An array of alternative names.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "phone": {
+                        "description": "The phone number of the user.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "email": {
+                        "description": "The account owner's registered email address.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "address": {
+                        "description": "The accounts owners registered address.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nationality":{
+                       "description":"The user's nationality.",
+                       "type":"string"
+                    },
+                    "lga_of_origin":{
+                       "description":"The local government area where the user originates from.",
+                       "type":"string"
+                    },
+                    "lga_of_residence":{
+                       "description":"The local government area of the user's place of residence.",
+                       "type":"string"
+                    },
+                    "state_of_origin":{
+                       "description":"The state where the user originates from.",
+                       "type":"string"
+                    },
+                    "state_of_residence":{
+                       "description":"The state where the user has residence.",
+                       "type":"string"
+                    },
+                    "marital_status": {
+                        "nullable": true,
+                        "description": "The marital status of the account owner.",
+                        "type": "string"
+                    },
+                    "next_of_kins": {
+                        "description": "The account owner person's closest living relative(s) as returned by the bank",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "nin": {
+                        "description": "The national identification number of the user.",
+                        "type": "string"
+                    },
+                    "photo_id": {
+                        "description": "The photograpgh of the user as provided by the bank.",
+                        "$ref": "#/components/schemas/PhotoId"
+                    },
+                    "enrollment":{
+                       "description": "Lists details about the bank where the user is enrolled.",
+                       "$ref":"#/components/schemas/Enrollment"
+                    }
+                }
+            },
+            "nuban_name_verify_response": {
+                "title": "Response for the NUBAN name verify operation",
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "description": "Shows whether the verify operation was successful or not.",
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "description": "Shows the status response message for the operation.",
+                        "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/nuban_name_verify_data"
+                    }
+                }
+            },
+            "nuban_name_verify_data": {
+                "title": "Data object in the response for the NUBAN name verify operation",
+                "type": "object",
+                "properties": {
+                    "identity": {
+                        "description": "Returns information about the identity of the user.",
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "The user's full name.",
+                                "type": "string"
+                            },
+                            "nuban": {
+                                "description": "The user's NUBAN.",
+                                "type": "string",
+                                "example": "0000014579"
+                            }
+                        }
+                    },
+                    "receipt":{
+                       "description": "Lists transaction details for the process operation.",
+                       "$ref":"#/components/schemas/Receipt"
+                    }
+                }
+            },
+            "Receipt": {
+                "title": "Transaction Receipt",
+                "type": "object",
+                "properties": {
+                    "status":{
+                        "description":"The status of your request.",
+                        "type":"string"
+                    },
+                    "msg":{
+                        "description":"The response message.",
+                        "type":"string",
+                        "example":"Receipt has been successfully created"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/transaction_receipt"
+                    }
+                }
+            },
+            "transaction_receipt": {
+                "title": "Transaction Receipt",
+                "type": "object",
+                "properties": {
+                    "adjustment": {
+                        "$ref": "#/components/schemas/Adjustment"
+                    },
+                    "charge_breakdown": {
+                        "$ref": "#/components/schemas/ChargeBreakdown"
+                    },
+                    "breakdown": {
+                        "$ref": "#/components/schemas/Breakdown"
+                    },
+                    "billingStatus": {
+                        "description":"Shows whether the billing was successful.",
+                        "type": "boolean"
+                    },
+                    "adjusted": {
+                        "description":"Returns the date when the receipt was adjusted.",
+                        "nullable": true,
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-06-10"
+                    },
+                    "adjusted_receipt": {
+                        "description":"Shows whether a receipt was adjusted as a result of a refund or for overcharging.",
+                        "type": "boolean"
+                    },
+                    "adjusted_type": {
+                        "description":"Shows the reason why a receipt was adjusted.\n - `duplicate-unbilled` means that the receipt is a duplicate of another receipt. Duplicate receipts should only be billed once.\n - `validated` means that receipt is verified to be a real API product call.",
+                        "nullable":true,
+                        "enum": ["duplicate-unbilled", "validated"],
+                        "type":"string"
+                    },
+                    "paid": {
+                        "description":"Shows whether the bill was paid for.",
+                        "type": "boolean"
+                    },
+                    "payment_amount": {
+                        "description":"Returns the amount that is paid via the Payments solution.",
+                        "type":"number"
+                    },
+                    "method": {
+                        "description":"Returns the billing method used in the receipt.",
+                        "enum": ["card", "wallet", "bank_transfer"],
+                        "type":"string"
+                    },
+                    "charge": {
+                        "description":"Returns the amount that is charged.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "wallet_balance": {
+                        "description":"Shows the current credit balance available in a wallet.",
+                        "type":"number"
+                    },
+                    "addons": {
+                        "description": "Returns the list of add-on services that Okra charged for.",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": ["reconciliation", "premium-support"]
+                        }
+                    },
+                    "archived": {
+                        "description":"Shows whether this record is archived.",
+                        "type": "boolean"
+                    },
+                    "micro_lending": {
+                        "description":"Shows whether the micro-lending pricing scheme was used.",
+                        "type": "boolean"
+                    },
+                    "ussd_pricing": {
+                        "description":"Shows whether the USSD pricing scheme was used.",
+                        "type": "boolean"
+                    },
+                    "ussd_pricing_discount": {
+                        "description":"Returns any discount that was used on the USSD pricing.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "micro_lending_discount": {
+                        "description":"Returns any discount that was used on the micro-lending pricing.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "_id": {
+                        "description":"The unique `ID` of a receipt record.",
+                        "type": "string"
+                    },
+                    "term": {
+                        "description":"The payment term.",
+                        "type": "string",
+                        "enum": ["prepaid", "postpaid"]
+                    },
+                    "owner": {
+                        "description":"The name of the account owner.",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description":"Returns the type of receipt. The API returns:\n - `deposit` when you top up your wallet.\n - `api-call` when you use paid endpoints. Check out the API reference for [the list of paid endpoints](https://docs.example.com/reference/api-receipts#how-it-works).\n - `withdrawal` when you withdraw from your wallet.\n - `plan-fee` for subscription fee debits.\n - `refund` when you receive a refund on your wallet.",
+                        "type":"string",
+                        "enum": ["deposit", "api-call", "withdrawal", "plan-fee", "refund"]
+                    },
+                    "currency": {
+                        "description":"Returns the currency used in the bill.",
+                        "type": "string",
+                        "enum": ["NGN", "USD", "GBP", "EUR", "Okra Credits"]
+                    },
+                    "record": {
+                        "description":"Returns the record ID for the creation of this receipt.",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description":"Indicates the date and time when the receipt was created. The timestamp value follows the ISO 8601 format, for example `2022-11-20`.",
+                        "type":"string"
+                    },
+                    "last_updated": {
+                        "description":"Indicates the date and time when the receipt was last updated. The timestamp value follows the ISO 8601 format, for example `2022-11-20`.",
+                        "type":"string"
+                    }
+                }
+            },
+            "Adjustment": {
+                "title": "Adjustment",
+                "type": "object",
+                "properties": {
+                    "receipts": {
+                        "description": "Used during receipt adjustment. Returns an array of the receipts that Okra created in order to adjust this receipt.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "ChargeBreakdown": {
+                "title": "ChargeBreakdown",
+                "type": "object",
+                "properties": {
+                    "vat": {
+                        "description":"Returns the amount of value added tax charged on any deposit.",
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "get_identity_response": {
+                "title":"Identity",
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "description":"Okra's unique identifier used to reference the identity profile.",
+                        "type":"string"
+                    },
+                    "firstname":{
+                        "description":"The first name of the account owner.",
+                        "type":"string"
+                    },
+                    "middlename":{
+                        "description":"The middlename name of the account owner.",
+                        "type":"string"
+                    },
+                    "lastname":{
+                        "description":"The last name of the account owner.",
+                        "type":"string"
+                    },
+                    "fullname":{
+                        "description":"The full name of the owner, as provided by the bank.",
+                        "type":"string"
+                    },
+                    "dob":{
+                        "description":"The account owner's date of birth, as provided by the bank.",
+                        "type":"string"
+                    },
+                    "bvn":{
+                        "description":"The bank verification number of the user.",
+                        "type":"string"
+                    },
+                    "gender":{
+                        "description":"The gender of the account owner.",
+                        "type":"string"
+                    },
+                    "customer":{
+                        "description":"Lists details of the user that the identity profile belongs to.",
+                        "$ref":"#/components/schemas/Customer"
+                    },
+                    "verification_country":{
+                        "description":"The country where the user's identity was verified.",
+                        "type":"string"
+                    },
+                    "env":{
+                        "description":"The API environment that returned the data.",
+                        "type":"string"
+                    },
+                    "aliases":{
+                        "description":"An array of alternative names.",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "phone":{
+                        "description":"The phone number of the user.",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "email":{
+                        "description":"The account owner's registered email address.",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "address":{
+                        "description":"The accounts owners registered address.",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "nationality":{
+                        "description":"The user's nationality.",
+                        "type":"string"
+                    },
+                    "lga_of_origin":{
+                        "description":"The local government area where the user originates from.",
+                        "type":"string"
+                    },
+                    "lga_of_residence":{
+                        "description":"The local government area of the user's place of residence.",
+                        "type":"string"
+                    },
+                    "state_of_origin":{
+                        "description":"The state where the user originates from.",
+                        "type":"string"
+                    },
+                    "state_of_residence":{
+                        "description":"The state where the user has residence.",
+                        "type":"string"
+                    },
+                    "marital_status":{
+                        "nullable":true,
+                        "description":"The marital status of the account owner.",
+                        "type":"string"
+                    },
+                    "mothers_maiden":{
+                        "nullable":true,
+                        "description":"The maiden name of the account owner's mother.",
+                        "type":"string"
+                    },
+                    "next_of_kins":{
+                        "description":"The account owner person's closest living relative(s), as returned by the bank",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "score":{
+                        "description":"This field shows how complete the user's identity profile is. `score` is calculated based on how many important data points, such as `address` and `email`, are returned by the user's bank. The resulting score is an integer between `0` and `100`.",
+                        "type":"number",
+                        "format":"integer",
+                        "example":"80"
+                    },
+                    "watch_listed":{
+                        "description":"This field shows whether the BVN connected to this identity profile is listed by the Central Bank of Nigeria for suspected fraudulent activities.",
+                        "type":"boolean"
+                    },
+                    "dti":{
+                        "description":"The API calculates the debt-to-Income (DTI) ratio for a user, which is the percentage of total debt relative to total income, from the time the user’s account is created.",
+                        "type":"number",
+                        "format":"float"
+                    },
+                    "rc_number":{
+                        "description":"The Registered Company Number of the account owner, as returned by the bank.",
+                        "type":"string",
+                        "nullable":true
+                    },
+                    "nin":{
+                        "nullable":true,
+                        "description":"The national identification number of the user.",
+                        "type":"string"
+                    },
+                    "photo_id":{
+                        "description":"The photograpgh of the user as provided by the bank.",
+                        "$ref":"#/components/schemas/PhotoId"
+                    },
+                    "created_at":{
+                        "description":"Indicates the date when the data point was first created. The timestamp value follows the ISO 8601 format.",
+                        "type":"string"
+                    },
+                    "last_updated":{
+                        "description":"Indicates the date when the data point was last updated. The timestamp value follows the ISO 8601 format. The API only returns this field when the data point already exists.",
+                        "type":"string",
+                        "nullable": true
+                    },
+                    "enrollment":{
+                        "description":"Lists details about the bank where the user is enrolled.",
+                        "$ref":"#/components/schemas/Enrollment"
+                    }
+                }
+            },
+            "PhotoId": {
+                "title": "PhotoId",
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "description": "Okra's unique ID for the photo.",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The url pointing to the image.",
+                        "type": "string"
+                    },
+                    "image_type": {
+                        "description": "The image type format of the photo, for example NIN photo.",
+                        "type": "string"
+                    },
+                    "bank": {
+                        "description": "The institution that is the source of the image.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "_id": "",
+                    "url": "",
+                    "image_type": "",
+                    "bank": ""
+                }
+            },
+            "Pagination": {
+                "title": "Pagination",
+                "type": "object",
+                "properties": {
+                    "totalDocs": {
+                        "format": "int32",
+                        "description": "The total number of results that match the request.",
+                        "type": "integer"
+                    },
+                    "limit": {
+                        "format": "int32",
+                        "description": "Returns the value of the `limit` parameter. Limit sets the number of results that the API returns in a single page. If you do not specify a value for `limit`, the API will limit the response to 10 results per page.",
+                        "type": "integer"
+                    },
+                    "hasPrevPage": {
+                        "description": "Shows when a previous page of results is available. This field always returns true when the value of `page` is greater than 1.",
+                        "type": "boolean"
+                    },
+                    "hasNextPage": {
+                        "description": "Shows when a next page of results is available. When `true`, Okra recommends that you make subsequent requests to retrieve the following pages of results.",
+                        "type": "boolean"
+                    },
+                    "page": {
+                        "format": "int32",
+                        "description": "Returns the number of the current page. For example, if you set `page` to 1 in your request, the API will return the first page of results in the response.",
+                        "type": "integer"
+                    },
+                    "totalPages": {
+                        "format": "int32",
+                        "description": "The total number of pages that the API returns.",
+                        "type": "integer"
+                    },
+                    "pagingCounter": {
+                        "description": "The index number of the first result on the current page. For example, if the value of `page` is 2 and `limit` is set to 10, then `pagingCounter` returns 11.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "prevPage": {
+                        "nullable": true,
+                        "description": "The number of previous result pages. If the value of `page` is 1 and there is no previous page, the value of `prevPage` is `null`.",
+                        "type": "string"
+                    },
+                    "nextPage": {
+                        "nullable": true,
+                        "description": "The number of following result pages. Each page consists of up to `100` items. If there are not enough results for an additional page, the value is `null`.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "scheme": "bearer",
+                "type": "http"
+            }
+        },
+        "examples": {
+            "nin_verify_response_example":{
+                "summary":"Identity successfully retrieved",
+                "description":"Example of a success response for the NIN verify operation.",
+                "value":[
+                    {
+                        "success": true,
+                        "message": "Identity retrieved successfully",
+                        "data": {
+                            "identity": {
+                                "_id": "119f2879df9a02d86938bd4c",
+                                "nin": "11112899518",
+                                "address": [
+                                    "22 Park ave"
+                                ],
+                                "aliases": [],
+                                "dob": "12-11-1984",
+                                "email": [
+                                    "ptj@example.com"
+                                ],
+                                "employer": [],
+                                "env": "production",
+                                "firstname": "Peter",
+                                "fullname": "Peter Timothy Jones",
+                                "gender": "Male",
+                                "lastname": "Jones",
+                                "lga_of_origin": "Lagos",
+                                "middlename": "Timothy",
+                                "nationality": "Nigeria",
+                                "next_of_kins": [],
+                                "phone": [
+                                    "11167214869"
+                                ],
+                                "photo_id": [
+                                    {
+                                        "url": "https://1111rry.cloudfront.net/NTg5MTI4OTk1MTg%3D.png",
+                                        "image_type": "nin_photo"
+                                    }
+                                ],
+                                "record": [
+                                    "119f28635eaaf5b6ad9580b1",
+                                    "119f2a61b4c397ca36c6a899",
+                                    "119f2a76b4c397ca36c6a8e2",
+                                    "119f2dc6856e65ea39913e87",
+                                    "11b1081afa7b550c9939d39b",
+                                    "11b1120b9079f3edecd3e8c8",
+                                    "11b4e0b5716570a15764c922"
+                                ],
+                                "state_of_origin": "Lagos",
+                                "customer": "1424b4263bd4390012d6b193"
+                            },
+                            "receipt": {
+                                "owner": "11d9288ea182d3d000cb7c486",
+                                "record": "16b4e0b5716570a15764c922",
+                                "customer": "1424b4263bd4390012d6b193",
+                                "billingStatus": true,
+                                "paid": true,
+                                "type": "api-call",
+                                "method": "wallet",
+                                "plan_term": "prepaid",
+                                "charge": 0.1,
+                                "charge_breakdown": {
+                                    "vat": 0
+                                },
+                                "wallet_balance": 3.11,
+                                "currency": "Okra Credits",
+                                "addons": [],
+                                "billable_product": "identity",
+                                "billable_service": "nin-verify",
+                                "breakdown": {
+                                    "discount": 0,
+                                    "billable_product": {
+                                        "product": "identity",
+                                        "effective_credits": 0,
+                                        "credits": 0.14,
+                                        "status": true,
+                                        "addon_products": []
+                                    },
+                                    "billable_products": [
+                                        {
+                                            "product": "identity",
+                                            "effective_cost": 0,
+                                            "cost": 0.14,
+                                            "status": true,
+                                            "addon_products": [],
+                                            "_id": "16b4e0b5716570a15764c93d"
+                                        }
+                                    ],
+                                    "source": "api",
+                                    "limit": 24
+                                },
+                                "current_project": "147894a51ae7fdc703bcaaa6",
+                                "_id": "116b4e0b5716570a15764c93c",
+                                "created_at": "2024-08-08T15:13:57.554Z",
+                                "last_updated": "2024-08-08T15:13:57.554Z"
+                            }
+                        }
+                    }
+                ]
+            },
+            "nin_verify_invalid_nin_length_example":{
+                "summary":"NIN Length Error",
+                "description":"Returned when the nin provided does not meet the required character length.",
+                "value":[
+                    {
+                        "status": "error",
+                        "message": "nin length must be at least 11 characters long",
+                        "data": null,
+                        "total": null
+                    }
+                ]
+            },
+            "nin_verify_400_error_example":{
+                "summary":"Invalid NIN",
+                "description":"Returned when the nin provider did not return a valid identity response",
+                "value":[
+                    {
+                        "status": "error",
+                        "message": "The provided NIN does not match any identity at this point.",
+                        "data": null,
+                        "total": null
+                    }
+                ]
+            },
+            "phone_verify_400_error_example":{
+                "summary":"Invalid NIN",
+                "description":"Returned when the identity provider did not return a valid identity response",
+                "value":[
+                    {
+                        "status": "error",
+                        "message": "The provided Phone does not match any identity at this point.",
+                        "data": null,
+                        "total": null
+                    }
+                ]
+            },
+            "phone_verify_invalid_nin_length_example":{
+                "summary":"Invalid Phone number",
+                "description":"Returned when the phone number provided does not meet the required character length.",
+                "value":[
+                    {
+                        "status": "error",
+                        "message": "phone length must be at least 11 characters long",
+                        "data": null,
+                        "total": null
+                    }
+                ]
+            },
+            "nuban_name_verify_response_example":{
+                "summary":"Identity successfully retrieved",
+                "description":"Example of a success response for the NUBAN name verify operation.",
+                "value":[
+                    {
+                        "success":true,
+                        "message":"Account Retrieved successfully",
+                        "data":{
+                            "identity":{
+                                "name":"Phoebe Buffay",
+                                "nuban":"06*****4"
+                            },
+                            "receipt":{
+                                "status":true,
+                                "msg":"Receipt has been successfully created",
+                                "data":{
+                                    "receipt":{
+                                        "charge_breakdown":{
+                                            "vat":0
+                                        },
+                                        "breakdown":{
+                                            "billable_product":{
+                                                "effective_credits":0,
+                                                "credits":1.2,
+                                                "status":true,
+                                                "addon_products":[
+                                                    
+                                                ],
+                                                "product":"identity"
+                                            },
+                                            "discount":0,
+                                            "billable_products":[
+                                                {
+                                                    "effective_cost":0,
+                                                    "cost":1.2,
+                                                    "status":true,
+                                                    "addon_products":[
+                                                        
+                                                    ],
+                                                    "_id":"1530ef70eef4f5003ca8276a",
+                                                    "archived":false,
+                                                    "product":"identity"
+                                                }
+                                            ],
+                                            "source":"api",
+                                            "limit":"3"
+                                        },
+                                        "billingStatus":true,
+                                        "paid":true,
+                                        "method":"wallet",
+                                        "charge":0.7,
+                                        "wallet_balance":2079.1,
+                                        "addons":[
+                                            
+                                        ],
+                                        "_id":"1530ef70eef4f5003ca82769",
+                                        "plan_term":"prepaid",
+                                        "owner":"1da6358130a943486f33dced",
+                                        "type":"api-call",
+                                        "billable_product":"identity",
+                                        "currency":"Okra Credits",
+                                        "record":"1530ef6deef4f5003ca82756",
+                                        "customer":"1530edc5c58381003baf71ff",
+                                        "current_project":"1ff62b99aea7a57a5c3baa01",
+                                        "billable_service":"nuban-name-verify",
+                                        "created_at":"2023-10-19T08:57:20.447Z",
+                                        "last_updated":"2023-10-19T08:57:20.447Z"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "search_identity_response_example":{
+                "summary":"Identity successfully retrieved",
+                "description":"Example of a success response for the Search identity operation.",
+                "value":[
+                    {
+                        "success": true,
+                        "message": "Identity Retrieved successfully",
+                        "data": {
+                            "identity": {
+                                "name": "John Peters",
+                                "nuban": "0007673912"
+                            },
+                            "receipt": {
+                                "owner": "1d9288ea182d3d000cb7c486",
+                                "record": "16b4e083716570a15764c8cf",
+                                "customer": "16b1333219759508ce42564b",
+                                "billingStatus": true,
+                                "paid": true,
+                                "type": "api-call",
+                                "method": "wallet",
+                                "plan_term": "prepaid",
+                                "charge": 0.14,
+                                "charge_breakdown": {
+                                    "vat": 0
+                                },
+                                "wallet_balance": 76.9800000000001,
+                                "currency": "Okra Credits",
+                                "addons": [],
+                                "billable_product": "identity",
+                                "billable_service": "nuban-name-verify",
+                                "breakdown": {
+                                    "discount": 0,
+                                    "billable_product": {
+                                        "product": "identity",
+                                        "effective_credits": 0,
+                                        "credits": 0.14,
+                                        "status": true,
+                                        "addon_products": []
+                                    },
+                                    "billable_products": [
+                                        {
+                                            "product": "identity",
+                                            "effective_cost": 0,
+                                            "cost": 0.14,
+                                            "status": true,
+                                            "addon_products": [],
+                                            "_id": "16b4e083716570a15764c8ec"
+                                        }
+                                    ],
+                                    "source": "api",
+                                    "limit": 24
+                                },
+                                "current_project": "147894a51ae7fdc703bcaaa6",
+                                "_id": "16b4e083716570a15764c8eb",
+                                "created_at": "2024-08-08T15:13:07.690Z",
+                                "last_updated": "2024-08-08T15:13:07.690Z"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Identity",
+            "description": "The Okra Identity API helps you verify users' identities by retrieving KYC information from their banks. Check out the [Identity API overview](/reference/identity-api) for more details."
+        },
+        {
+            "name": "Banks",
+            "description": "API endpoints that return bank and coverage information."
+        },
+        {
+            "name": "Wallets",
+            "description": "API endpoints that return information about your Okra wallet and credit ballance."
+        }
+    ],
+    "security": [
+        {
+            "bearer": [
+            ]
+        }
+    ]
+}

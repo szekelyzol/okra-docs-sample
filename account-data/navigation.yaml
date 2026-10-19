@@ -1,0 +1,18 @@
+---
+- heading: Introduction
+  items:
+    - label: Overview
+      href: /account-data/
+    - label: Coverage
+      href: /account-data/account-data-coverage
+- heading: Understand Identity
+  items:
+    - label: Identity product guide
+      href: /account-data/identity
+
+- heading: Identity reference
+  items:
+    - label: Identity migration guide
+      href: /account-data/identity-migration
+    - label: Identity API
+      href: /reference/identity-api

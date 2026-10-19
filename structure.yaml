@@ -1,0 +1,37 @@
+tabs:
+  - label: Home
+    icon:
+      set: lucide
+      name: home
+    subtabs:
+      - label: Home
+        path: /
+  - label: Get started
+    icon:
+      set: lucide
+      name: sparkles
+    subtabs:
+      - label: Get started
+        path: /get-started/
+  - label: Identity
+    icon:
+      set: lucide
+      name: users
+    subtabs:
+      - label: Account data
+        path: /account-data/
+  - label: Developer tools
+    icon:
+      set: lucide
+      name: code
+    subtabs:
+      - label: Okra API
+        path: /reference/
+        icon:
+          set: lucide
+          name: code
+      - label: Troubleshooting
+        path: /reference/troubleshooting/
+        icon:
+          set: lucide
+          name: help-circle

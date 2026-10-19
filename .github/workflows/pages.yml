@@ -1,0 +1,68 @@
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Docapella is pre-1.0 and has no releases, so pin a commit.
+  DOCAPELLA_REV: 789583bb81bbae43a8600b0b4f525a9bce387038
+  # The repo is served at https://<user>.github.io/<repo>/, but Docapella
+  # renders links from the domain root. The post-build step adds this prefix.
+  BASE_PATH: /${{ github.event.repository.name }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Docapella binary
+        id: cache-docapella
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/docapella
+          key: docapella-${{ runner.os }}-${{ env.DOCAPELLA_REV }}
+
+      - name: Install Docapella
+        if: steps.cache-docapella.outputs.cache-hit != 'true'
+        run: cargo install --git https://github.com/Doctave/docapella.git --rev "$DOCAPELLA_REV" docapella
+
+      - name: Build site
+        run: docapella build
+
+      - name: Apply base path and color mode
+        run: node scripts/postbuild.mjs _build "$BASE_PATH"
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _build
+
+  deploy:
+    name: Deploy
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

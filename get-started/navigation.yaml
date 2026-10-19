@@ -1,0 +1,16 @@
+
+- heading: Get started
+  items:
+    - label: Start using Okra
+      href: /get-started/
+    - label: Onboarding
+      href: /get-started/onboarding
+    - label: Testing your integration
+      href: /get-started/testing-your-integration
+    - label: Going live
+      href: /get-started/going-live
+
+- heading: Need help?
+  items:
+    - label: Support
+      href: /get-started/support

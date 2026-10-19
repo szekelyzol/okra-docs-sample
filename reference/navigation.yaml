@@ -1,0 +1,29 @@
+- heading: Okra API
+  items:
+    - label: Overview
+      href: ./
+    - label: API receipts
+      href: ./api-receipts
+    - label: Okra IDs
+      href: /reference/okra-ids
+
+- heading: Identity API
+  items:
+    - label: Overview
+      href: ./identity-api
+    - open_api_spec: docs.json
+      only:
+      - Identity
+
+- heading: Service endpoints
+  items:
+    - open_api_spec: docs.json
+      only:
+      - Banks    
+    - label: Wallet overview
+      href: ./wallet
+      collapsed: true
+      items:
+      - open_api_spec: docs.json
+        only:
+        - Wallets
